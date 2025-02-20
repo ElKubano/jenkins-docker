@@ -1,13 +1,13 @@
 pipeline {
     agent any 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('karim-dockerhub')
+    DOCKERHUB_CREDENTIALS = credentials('github-jenkins')
     }
     stages { 
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t myapp/flask:$BUILD_NUMBER .'
+                sh 'docker build -t koalanewb/jenkins-docker:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push myapp/flask:$BUILD_NUMBER'
+                sh 'docker push koalanewb/jenkins-docker:$BUILD_NUMBER'
             }
         }
 }
